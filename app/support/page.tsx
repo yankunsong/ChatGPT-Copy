@@ -9,7 +9,7 @@ export default function App() {
   const handleButtonClick = () => {
     setShowText(!showText);
   };
-  const A = 20;
+  const A = 66;
   const B = 30 * 7;
   return (
     <div className="container">
