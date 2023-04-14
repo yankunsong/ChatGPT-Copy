@@ -39,7 +39,7 @@ export default function App() {
         <progress id="my-progress-bar" value={A} max={B}></progress>
       </div>
       <div className="image-container">
-        <Image src="wechat.jpeg" alt="123" className="image" />
+        <Image src="wechat.jpg" alt="123" className="image" />
       </div>
       <div className="hidden-text-container">
         {showText && <p>当前密码: dong1</p>}
