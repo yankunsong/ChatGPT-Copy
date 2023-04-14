@@ -4,8 +4,7 @@ import type { LocaleType } from "./index";
 const en: LocaleType = {
   WIP: "WIP...",
   Error: {
-    Unauthorized:
-      "Unauthorized access, please enter access code in settings page.",
+    Unauthorized: "网站密码已更新。请前往bigmiao.xyz/support查看",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} messages`,
