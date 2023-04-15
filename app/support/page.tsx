@@ -31,9 +31,13 @@ const updateDB = async () => {
 };
 export default function App() {
   const [showText, setShowText] = useState(false);
+
   const handleButtonClick = () => {
-    setShowText(!showText);
+    if (showText) return;
+    setShowText(true);
+    updateDB();
   };
+
   const A = 86;
   const B = 30 * 7;
   return (
