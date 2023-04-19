@@ -38,8 +38,8 @@ export default function App() {
     updateDB();
   };
 
-  const A = 282.30;
-  const B = 32 * 7;
+  const A = 297.30;
+  const B = 36.5 * 7;
   return (
     <div className="container">
       <div className="text-container">
