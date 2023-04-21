@@ -39,7 +39,7 @@ export default function App() {
   };
 
   const A = 379.30;
-  const B = 38 * 7;
+  const B = (26.75 + 15 + 30） * 7;
   return (
     <div className="container">
       <div className="text-container">
