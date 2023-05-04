@@ -16,7 +16,7 @@ const updateDB = async () => {
     timeZone: "America/New_York",
   });
   const params = {
-    TableName: "user_click",
+    TableName: "paid_user_click",
     Item: {
       click_time: { S: now },
     },
@@ -29,28 +29,26 @@ const updateDB = async () => {
     console.error("Error adding new click item:", error);
   }
 };
+
 export default function App() {
   const [showText, setShowText] = useState(false);
+  const [hasPaid, setHasPaid] = useState(false);
 
   const handleButtonClick = () => {
-    if (showText) return;
+    if (showText || !hasPaid) return;
     setShowText(true);
     updateDB();
   };
 
-  const A = 507.96;
-  const B = (34 + 15 + 15) * 7;
   return (
     <div className="container">
       <div className="text-container">
         <br />
         <p>欢迎大家使用我的网站!</p>
         <p>
-          目前为止，网站的建立和运营已经产生了200多元的费用，并且每天还会新增十几元的消费。
+          网站上线以来，得到了很多朋友的支持，也帮助了很多朋友。我很开心能够帮助到大家。
         </p>
-        <p>
-          为了能长久地运行，现在开始网站将开始收费。大家可以根据自己的使用量，和GPT对自己的帮助程度，进行自助付费。
-        </p>
+        <p>有很多朋友甚至捐赠了几十上百元，非常感谢你们的支持！</p>
         <p>感谢已经进行了付费的朋友，网站的持续运营得益于你们的支持！ </p>
         <p>
           近期我会采取这种自助形式，大概每周会更新一次密码，强制大家回到这个页面。最新的密码会在页面底端。
@@ -75,7 +73,7 @@ export default function App() {
         <Image src="wechat.jpg" alt="123" className="image" />
       </div>
       <div className="hidden-text-container">
-        {showText && <p>当前密码: dong2</p>}
+        {showText && <p>当前密码: 1234</p>}
         <button onClick={handleButtonClick}>查看访问密码</button>
       </div>
     </div>
