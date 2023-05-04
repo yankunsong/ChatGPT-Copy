@@ -63,12 +63,6 @@ export default function App() {
           如果使用中有任何问题，可以通过邮件与我联系。我的邮箱是bigcatisgreat@gmail.com，有捐赠的朋友也可以加我微信，交个朋友。
         </p>
       </div>
-      <div className="progress-container">
-        <text>
-          目前进度: {A}/{B}
-        </text>
-        <progress id="my-progress-bar" value={A} max={B}></progress>
-      </div>
       <div className="image-container">
         <Image src="wechat.jpg" alt="123" className="image" />
       </div>
