@@ -103,8 +103,8 @@ export default function App() {
         </p>
       </div>
       <div className="image-container">
-        <Image src="wechat.jpg" alt="wechat" className="image" />
-        <Image src="alipay.jpg" alt="alipay" className="image" />
+        <Image src="wechat.png" alt="wechat" className="image" />
+        <Image src="alipay.png" alt="alipay" className="image" />
       </div>
       <div className="hidden-text-container">
         {showText && <p>当前密码: gpt</p>}
