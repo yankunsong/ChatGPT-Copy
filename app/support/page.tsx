@@ -103,12 +103,16 @@ export default function App() {
         </p>
       </div>
       <div className="image-container">
+        <p>微信二维码：</p>
         <Image src="wechat.png" alt="wechat" className="image" />
-        <Image src="alipay.png" alt="alipay" className="image" />
       </div>
       <div className="hidden-text-container">
         {showText && <p>当前密码: gpt</p>}
         <button onClick={handleButtonClick}>查看访问密码</button>
+      </div>
+      <div className="image-container">
+        <p>支付宝二维码：</p>
+        <Image src="alipay.png" alt="alipay" className="image" />
       </div>
     </div>
   );
