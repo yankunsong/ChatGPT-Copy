@@ -67,7 +67,9 @@ export default function App() {
   ];
 
   const handleButtonClick = () => {
-    if (showText || !hasPaid) return;
+    // if (showText || !hasPaid) return;
+    if (showText) return;
+
     setShowText(true);
     updateDB();
   };
@@ -81,8 +83,12 @@ export default function App() {
         <p>
           现在网站的收入和支出大致相当。而后台可以看到，大约有1/3的用户进行了付费。能做到收支平衡，是有几位朋友捐赠了几十上百元，她们对这个网站的运营做出了巨大的贡献。
         </p>
-        <p>也正是你们善意的肯定，让我有动力更新维护这个网站。 </p>
-        <p>从现在开始，网站也将暂时只对这部分用户开放。</p>
+        <p>也正是你们的正反馈，让这个网站可以持续运营，并加以更新。 </p>
+        <p>
+          比如目前网站新增了预制角色功能（面具），可以方便地创建、分享和调试你的个性化对话。
+        </p>
+        <p>在对话框中，输入“/”，也会弹出一些指令，让gpt扮演一些角色。</p>
+        {/* <p>从现在开始，网站也将暂时只对这部分用户开放。</p>
         <p>
           近期我会采取这种自助形式，大概每周会更新一次密码，强制大家回到这个页面。最新的密码会在页面底端。
         </p>
@@ -91,16 +97,17 @@ export default function App() {
         </p>
         <p>
           另外，这个网站仅为星球朋友内部学习交流使用，请尽量不要分享给其他人。
-        </p>
+        </p> */}
         <p>
           如果使用中有任何问题，可以通过邮件与我联系。我的邮箱是bigcatisgreat@gmail.com，有捐赠的朋友也可以加我微信，交个朋友。
         </p>
       </div>
       <div className="image-container">
-        <Image src="wechat.jpg" alt="123" className="image" />
+        <Image src="wechat.jpg" alt="wechat" className="image" />
+        <Image src="alipay.jpg" alt="alipay" className="image" />
       </div>
       <div className="hidden-text-container">
-        {showText && <p>当前密码: 1234</p>}
+        {showText && <p>当前密码: gpt</p>}
         <button onClick={handleButtonClick}>查看访问密码</button>
       </div>
     </div>
