@@ -91,7 +91,7 @@ export default function App() {
       }
     }
     if (!valid) {
-      updateDB({ valid, input: name });
+      updateDB({ valid, input: name, pattern: "" });
     }
   };
 
