@@ -4,6 +4,44 @@ import Image from "next/image";
 import React, { useState } from "react";
 import AWS from "aws-sdk";
 import "./styles.scss";
+interface InputProps {
+  valid: boolean;
+  input: string;
+  pattern?: string;
+}
+
+const patterns = [
+  /[思雨棋睿菲]$/,
+  /.*S$/,
+  /.*雨$/,
+  /.*菜$/,
+  /.*限$/,
+  /^C.*N$/,
+  /^z.*z$/,
+  /.*佑$/,
+  /^S.*a$/,
+  /55/,
+  /^w.*g$/,
+  /.*诗$/,
+  /^S.*y$/,
+  /^S.*t$/,
+  /^J.*n$/,
+  /.*子$/,
+  /^z.*z$/,
+  /.*\)/,
+  /.*茶$/,
+  /.*郎$/,
+  /^T.*e$/,
+  /^A.*L$/,
+  /^T.*i$/,
+  /^E.*a$/,
+  /^E.*e$/,
+  /^惠.*o$/,
+  /^Z.*y$/,
+  /^A.*l$/,
+  /^A.*I$/,
+  /^莫.*.$/,
+];
 
 const dynamodb = new AWS.DynamoDB({
   region: "us-east-1",
@@ -11,14 +49,17 @@ const dynamodb = new AWS.DynamoDB({
   secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET,
 });
 
-const updateDB = async () => {
+const updateDB = async (input: InputProps) => {
   const now = new Date().toLocaleString("en-US", {
     timeZone: "America/New_York",
   });
   const params = {
-    TableName: "paid_user_click",
+    TableName: "click_tracker",
     Item: {
       click_time: { S: now },
+      valid: { BOOL: input.valid },
+      input: { S: input.input },
+      pattern: { S: input.pattern },
     },
   };
 
@@ -32,46 +73,26 @@ const updateDB = async () => {
 
 export default function App() {
   const [showText, setShowText] = useState(false);
-  const [hasPaid, setHasPaid] = useState(false);
+  const [name, setName] = useState("");
 
-  const patterns = [
-    /.*S$/,
-    /.*雨$/,
-    /.*菜$/,
-    /.*限$/,
-    /^C.*N$/,
-    /^z.*z$/,
-    /.*佑$/,
-    /^S.*a$/,
-    /55/,
-    /^w.*g$/,
-    /.*诗$/,
-    /^S.*y$/,
-    /^S.*t$/,
-    /^J.*n$/,
-    /.*子$/,
-    /^z.*z$/,
-    /.*\)/,
-    /.*茶$/,
-    /.*郎$/,
-    /^T.*e$/,
-    /^A.*L$/,
-    /^T.*i$/,
-    /^E.*a$/,
-    /^E.*e$/,
-    /^惠.*o$/,
-    /^Z.*y$/,
-    /^A.*l$/,
-    /^A.*I$/,
-    /^莫.*.$/,
-  ];
+  const handleInputChange = (event: any) => {
+    setName(event.target.value);
+  };
 
   const handleButtonClick = () => {
-    // if (showText || !hasPaid) return;
     if (showText) return;
-
-    setShowText(true);
-    updateDB();
+    let valid = false;
+    for (const pattern of patterns) {
+      if (pattern.test(name)) {
+        valid = true;
+        updateDB({ valid, input: name, pattern: pattern.toString() });
+        setShowText(true);
+        break;
+      }
+    }
+    if (!valid) {
+      updateDB({ valid, input: name });
+    }
   };
 
   return (
@@ -98,22 +119,26 @@ export default function App() {
         <p>
           另外，这个网站仅为星球朋友内部学习交流使用，请尽量不要分享给其他人。
         </p> */}
+        <label>
+          Your name is:
+          <input type="text" value={name} onChange={handleInputChange} />
+        </label>
+        <button onClick={handleButtonClick}>Check</button>
         <p>
           如果使用中有任何问题，可以通过邮件与我联系。我的邮箱是bigcatisgreat@gmail.com，有捐赠的朋友也可以加我微信，交个朋友。
         </p>
       </div>
-      <div className="image-container">
+      {/* <div className="image-container">
         <p>微信二维码：</p>
         <Image src="wechat.png" alt="wechat" className="image" />
-      </div>
+      </div> */}
       <div className="hidden-text-container">
         {showText && <p>当前密码: gpt</p>}
-        <button onClick={handleButtonClick}>查看访问密码</button>
       </div>
-      <div className="image-container">
+      {/* <div className="image-container">
         <p>支付宝二维码：</p>
         <Image src="alipay.png" alt="alipay" className="image" />
-      </div>
+      </div> */}
     </div>
   );
 }
