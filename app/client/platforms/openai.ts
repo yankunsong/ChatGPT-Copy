@@ -26,6 +26,10 @@ export class ChatGPTApi implements LLMApi {
     return res.choices?.at(0)?.message?.content ?? "";
   }
 
+  extractTokens(res: any) {
+    return res.usage?.total_tokens;
+  }
+
   async chat(options: ChatOptions) {
     const messages = options.messages.map((v) => ({
       role: v.role,
@@ -163,68 +167,70 @@ export class ChatGPTApi implements LLMApi {
     }
   }
   async usage() {
-    const formatDate = (d: Date) =>
-      `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d
-        .getDate()
-        .toString()
-        .padStart(2, "0")}`;
-    const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
-    const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const startDate = formatDate(startOfMonth);
-    const endDate = formatDate(new Date(Date.now() + ONE_DAY));
+    // const formatDate = (d: Date) =>
+    //   `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d
+    //     .getDate()
+    //     .toString()
+    //     .padStart(2, "0")}`;
+    // const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
+    // const now = new Date();
+    // const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    // const startDate = formatDate(startOfMonth);
+    // const endDate = formatDate(new Date(Date.now() + ONE_DAY));
+    const accessCode = useAccessStore.getState().accessCode;
+    console.log("ACCESS CODE:::::", accessCode);
 
-    const [used, subs] = await Promise.all([
-      fetch(
-        this.path(
-          `${this.UsagePath}?start_date=${startDate}&end_date=${endDate}`,
-        ),
-        {
-          method: "GET",
-          headers: getHeaders(),
-        },
-      ),
-      fetch(this.path(this.SubsPath), {
-        method: "GET",
-        headers: getHeaders(),
-      }),
-    ]);
+    // const [used, subs] = await Promise.all([
+    //   fetch(
+    //     this.path(
+    //       `${this.UsagePath}?start_date=${startDate}&end_date=${endDate}`,
+    //     ),
+    //     {
+    //       method: "GET",
+    //       headers: getHeaders(),
+    //     },
+    //   ),
+    //   fetch(this.path(this.SubsPath), {
+    //     method: "GET",
+    //     headers: getHeaders(),
+    //   }),
+    // ]);
 
-    if (used.status === 401) {
-      throw new Error(Locale.Error.Unauthorized);
-    }
+    // if (used.status === 401) {
+    //   throw new Error(Locale.Error.Unauthorized);
+    // }
 
-    if (!used.ok || !subs.ok) {
-      throw new Error("Failed to query usage from openai");
-    }
+    // if (!used.ok || !subs.ok) {
+    //   throw new Error("Failed to query usage from openai");
+    // }
 
-    const response = (await used.json()) as {
-      total_usage?: number;
-      error?: {
-        type: string;
-        message: string;
-      };
-    };
+    // const response = (await used.json()) as {
+    //   total_usage?: number;
+    //   error?: {
+    //     type: string;
+    //     message: string;
+    //   };
+    // };
 
-    const total = (await subs.json()) as {
-      hard_limit_usd?: number;
-    };
+    // const total = (await subs.json()) as {
+    //   hard_limit_usd?: number;
+    // };
 
-    if (response.error && response.error.type) {
-      throw Error(response.error.message);
-    }
+    // if (response.error && response.error.type) {
+    //   throw Error(response.error.message);
+    // }
 
-    if (response.total_usage) {
-      response.total_usage = Math.round(response.total_usage) / 100;
-    }
+    // if (response.total_usage) {
+    //   response.total_usage = Math.round(response.total_usage) / 100;
+    // }
 
-    if (total.hard_limit_usd) {
-      total.hard_limit_usd = Math.round(total.hard_limit_usd * 100) / 100;
-    }
+    // if (total.hard_limit_usd) {
+    //   total.hard_limit_usd = Math.round(total.hard_limit_usd * 100) / 100;
+    // }
 
     return {
-      used: response.total_usage,
-      total: total.hard_limit_usd,
+      used: 1,
+      total: 2,
     } as LLMUsage;
   }
 }
