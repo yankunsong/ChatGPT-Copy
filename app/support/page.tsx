@@ -116,7 +116,14 @@ export default function App() {
         <p>
           非常欢迎大家给我反馈，帮助我决定后面是不是要开放4的接口。以及如果开放的话，如何保持网站的收支平衡。{" "}
         </p>
-
+        <br />
+        <p>关于付费：</p>
+        <p>
+          本网站初衷是方便董董星球的朋友体验GPT，无盈利目的。放收款码是因为GPT的访问不是免费的，通过API对话会产生一定的费用。
+        </p>
+        <p>
+          目前只有初期主动捐赠过的用户才在白名单里。所以如果你是刚知道这个网站并且想使用，请邮件与我说明情况。
+        </p>
         <label>
           Your name is:
           <input type="text" value={name} onChange={handleInputChange} />
