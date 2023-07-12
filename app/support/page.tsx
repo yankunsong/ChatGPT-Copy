@@ -50,9 +50,7 @@ const dynamodb = new AWS.DynamoDB({
 });
 
 const updateDB = async (input: InputProps) => {
-  const now = new Date().toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
+  const now = new Date().toISOString();
   const params = {
     TableName: "click_tracker",
     Item: {
@@ -87,12 +85,12 @@ export default function App() {
         valid = true;
         updateDB({ valid, input: name, pattern: pattern.toString() });
         setShowText(true);
-        alert("六月的密码是：june");
+        alert("当前的密码是：july2");
         break;
       }
     }
     if (!valid) {
-      alert("未发现匹配，请注意大小写。");
+      alert("未发现匹配，请注意大小写，或邮件与我联系");
       updateDB({ valid, input: name, pattern: "" });
     }
   };
