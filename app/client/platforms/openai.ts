@@ -40,10 +40,14 @@ export class ChatGPTApi implements LLMApi {
       ...useAppConfig.getState().modelConfig,
       ...useChatStore.getState().currentSession().mask.modelConfig,
       ...{
-        // model: options.config.model,
-        model: "gpt-3.5-turbo",
+        model: options.config.model,
       },
     };
+
+    const accessCode = useAccessStore.getState().accessCode;
+    if (accessCode !== "panda") {
+      modelConfig.model = "gpt-3.5-turbo";
+    }
 
     const requestPayload = {
       messages,
