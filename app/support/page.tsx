@@ -73,9 +73,9 @@ const updateDB = async (input: InputProps) => {
 
 export default function App() {
   const [showText, setShowText] = useState(false);
-  const [isAdvanced, setIsAdvanced] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  let isAdvanced = false;
 
   const handleNameChange = (event: any) => {
     setName(event.target.value);
@@ -89,10 +89,7 @@ export default function App() {
     if (showText) return;
     let valid = false;
     console.log(amount);
-    if (Number(amount) >= 30) {
-      setIsAdvanced(true);
-      console.log("setttttt", isAdvanced);
-    }
+    if (Number(amount) >= 30) isAdvanced = true;
 
     for (const pattern of patterns) {
       if (pattern.test(name)) {
