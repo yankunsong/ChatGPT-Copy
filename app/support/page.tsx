@@ -73,9 +73,9 @@ const updateDB = async (input: InputProps) => {
 
 export default function App() {
   const [showText, setShowText] = useState(false);
+  const [isAdvanced, setIsAdvanced] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
-  let isAdvanced = false;
 
   const handleNameChange = (event: any) => {
     setName(event.target.value);
@@ -88,8 +88,9 @@ export default function App() {
   const handleButtonClick = () => {
     if (showText) return;
     let valid = false;
-    console.log(amount);
-    if (Number(amount) >= 30) isAdvanced = true;
+    let isAdvancedTmp = isAdvanced;
+    if (Number(amount) >= 30) isAdvancedTmp = true;
+    setIsAdvanced(isAdvancedTmp);
 
     for (const pattern of patterns) {
       if (pattern.test(name)) {
@@ -102,8 +103,7 @@ export default function App() {
         });
         setShowText(true);
         console.log("isAdvanced", isAdvanced);
-        const notice = isAdvanced ? "高级密码是：aug44" : "普通密码是：aug";
-        console.log(notice);
+        const notice = isAdvancedTmp ? "高级密码是：aug44" : "普通密码是：aug";
         alert(notice);
         break;
       }
