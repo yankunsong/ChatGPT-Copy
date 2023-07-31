@@ -88,7 +88,11 @@ export default function App() {
     if (showText) return;
     let valid = false;
     const amt = Number(amount) || 1;
-    if (amt >= 30) setAdv(true);
+    console.log(amt);
+    if (amt >= 30) {
+      setAdv(true);
+      console.log("advanced mode on");
+    }
 
     for (const pattern of patterns) {
       if (pattern.test(name)) {
@@ -100,7 +104,9 @@ export default function App() {
           advanced: isAdvanced,
         });
         setShowText(true);
+        console.log("isAdvanced", isAdvanced);
         const notice = isAdvanced ? "高级密码是：aug44" : "普通密码是：aug";
+        console.log(notice);
         alert(notice);
         break;
       }
