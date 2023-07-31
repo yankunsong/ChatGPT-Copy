@@ -8,7 +8,7 @@ interface InputProps {
   valid: boolean;
   input: string;
   pattern?: string;
-  advanced?: boolean;
+  amount?: string;
 }
 
 const patterns = [
@@ -59,6 +59,7 @@ const updateDB = async (input: InputProps) => {
       valid: { BOOL: input.valid },
       input: { S: input.input },
       pattern: { S: input.pattern },
+      amount: { S: input.amount },
     },
   };
 
@@ -87,11 +88,10 @@ export default function App() {
   const handleButtonClick = () => {
     if (showText) return;
     let valid = false;
-    const amt = Number(amount) || 1;
-    console.log(amt);
-    if (amt >= 30) {
+    console.log(amount);
+    if (Number(amount) >= 30) {
       setIsAdvanced(true);
-      console.log("advanced mode on");
+      console.log("setttttt", isAdvanced);
     }
 
     for (const pattern of patterns) {
@@ -101,7 +101,7 @@ export default function App() {
           valid,
           input: name,
           pattern: pattern.toString(),
-          advanced: isAdvanced,
+          amount: amount,
         });
         setShowText(true);
         console.log("isAdvanced", isAdvanced);
