@@ -72,7 +72,7 @@ const updateDB = async (input: InputProps) => {
 
 export default function App() {
   const [showText, setShowText] = useState(false);
-  const [isAdvanced, setAdv] = useState(false);
+  const [isAdvanced, setIsAdvanced] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -90,7 +90,7 @@ export default function App() {
     const amt = Number(amount) || 1;
     console.log(amt);
     if (amt >= 30) {
-      setAdv(true);
+      setIsAdvanced(true);
       console.log("advanced mode on");
     }
 
