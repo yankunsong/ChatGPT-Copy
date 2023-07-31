@@ -8,6 +8,7 @@ interface InputProps {
   valid: boolean;
   input: string;
   pattern?: string;
+  advanced?: boolean;
 }
 
 const patterns = [
@@ -71,21 +72,36 @@ const updateDB = async (input: InputProps) => {
 
 export default function App() {
   const [showText, setShowText] = useState(false);
+  const [isAdvanced, setAdv] = useState(false);
   const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
 
-  const handleInputChange = (event: any) => {
+  const handleNameChange = (event: any) => {
     setName(event.target.value);
+  };
+
+  const handleAmountChange = (event: any) => {
+    setAmount(event.target.value);
   };
 
   const handleButtonClick = () => {
     if (showText) return;
     let valid = false;
+    const amt = Number(amount) || 1;
+    if (amt >= 30) setAdv(true);
+
     for (const pattern of patterns) {
       if (pattern.test(name)) {
         valid = true;
-        updateDB({ valid, input: name, pattern: pattern.toString() });
+        updateDB({
+          valid,
+          input: name,
+          pattern: pattern.toString(),
+          advanced: isAdvanced,
+        });
         setShowText(true);
-        alert("当前的密码是：july2");
+        const notice = isAdvanced ? "高级密码是：aug44" : "普通密码是：aug";
+        alert(notice);
         break;
       }
     }
@@ -102,31 +118,48 @@ export default function App() {
         {/* <p>欢迎大家使用我的网站!</p>
         <p>到月末了，请大家对6月的使用情况，和对自己的帮助大小自助付费。</p>
         <p>多用多付，少用少付，不用不付。 </p> */}
-        <p>抱歉强制大家回到这个页面。不过这是为了宣布一个好消息。 ：） </p>
+        <p>上个月网站开放了GPT4的接口，也随之产生了大量的费用。</p>
         <p>
-          OpenAI现在对所有用户开放了GPT-4的接口，也就是说，现在所有人都可以使用GPT-4的能力了。
+          为了兼顾大家的普通需求，和对GPT4的需求，我决定暂时同时采用两种模式。
         </p>
         <p>
-          为了让大家体验，我决定本周尝试性地在设置里开放切换到GPT4模型的功能。{" "}
+          1.
+          普通模式：对所有有过付费的用户开放，并且先用后付。每个月底，自愿对这个月的使用情况付费。多用多付，少用少付，不用不付。
         </p>
-        <p>如果你想尝试，请在设置里切换到GPT-4模型。 </p>
+        <p>比如这次付费，就是对7月的使用情况付费。</p>
         <p>
-          之所以说“尝试性”，是因为GPT4的价格是我们一直默认使用的GPT3.5的20倍。所以预期会有非常明显的支出。
+          2.
+          高级模式：每次付费30元及以上，即可获得有GPT4权限的密码。该密码有效期为一个月。仅供自己使用，不得分享。
         </p>
         <p>
-          非常欢迎大家给我反馈，帮助我决定后面是不是要开放4的接口。以及如果开放的话，如何保持网站的收支平衡。{" "}
+          下面的表单会自动判别数额，大于30即显示高级模式的密码。请如实填写。如有造假，永久拉黑。
+        </p>
+        <p>
+          为了方便我核对，请大家付款的数额带上随意的小数点，如支付30.17，
+          40.46等。
+        </p>
+        <p>
+          模型可以在网页左下角的设置中选择，gpt-4或者gpt-3.5-turbo。gpt4仅在使用的是有权限的密码时生效。
+        </p>
+        <p>
+          判断自己用的是哪个模型，可以问GPT，“我为什么没有参加我爸爸妈妈的婚礼？”GPT4会说“因为您的父母在您出生之前就已经结婚了”，而3.5则意识不到这一点。
         </p>
         <br />
         <p>关于付费：</p>
         <p>
           本网站初衷是方便董董星球的朋友体验GPT，无盈利目的。放收款码是因为GPT的访问不是免费的，通过API对话会产生一定的费用。
         </p>
+        <p>官方GPT4的单价是GPT3.5的20倍。</p>
         <p>
           目前只有初期主动捐赠过的用户才在白名单里。所以如果你是刚知道这个网站并且想使用，请邮件与我说明情况。
         </p>
         <label>
           Your name is:
-          <input type="text" value={name} onChange={handleInputChange} />
+          <input type="text" value={name} onChange={handleNameChange} />
+        </label>
+        <label>
+          我刚刚已付费:
+          <input type="text" value={amount} onChange={handleAmountChange} />
         </label>
         <button onClick={handleButtonClick}>Check</button>
         <p>
@@ -138,7 +171,8 @@ export default function App() {
         <Image src="wechat.png" alt="wechat" className="image" />
       </div> */}
       <div className="hidden-text-container">
-        {showText && <p>当前密码: july2</p>}
+        {showText && isAdvanced && <p>高级密码: aug44</p>}
+        {showText && !isAdvanced && <p>普通密码: aug</p>}
       </div>
       <div className="image-container">
         <p>支付宝二维码：</p>
