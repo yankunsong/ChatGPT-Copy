@@ -45,7 +45,7 @@ export class ChatGPTApi implements LLMApi {
     };
 
     const accessCode = useAccessStore.getState().accessCode;
-    if (accessCode !== "panda") {
+    if (accessCode !== "panda" || accessCode !== "aug44") {
       modelConfig.model = "gpt-3.5-turbo";
     }
 
