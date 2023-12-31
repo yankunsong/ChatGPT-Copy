@@ -103,7 +103,7 @@ export default function App() {
         });
         setShowText(true);
         console.log("isAdvanced", isAdvanced);
-        const notice = "密码是：oct";
+        const notice = "密码是：2024";
         alert(notice);
         break;
       }
@@ -122,18 +122,9 @@ export default function App() {
         <p>到月末了，请大家对6月的使用情况，和对自己的帮助大小自助付费。</p>
         <p>多用多付，少用少付，不用不付。 </p> */}
         <p>
-          <strong>请大家对8月和9月至今的使用情况自行付费。</strong>
+          <strong>请大家对10月至今的使用情况自行付费。</strong>
         </p>
-        <p>
-          8月试着开放了GPT4接口，收费30元。但是官方价格过高，这个收费仅够支付10天不到的费用。如果要维持平衡，得收费100多元一月。
-        </p>
-        <p>所以目前网站将只开放GPT3.5。</p>
-        <p>感谢有一些朋友在8月底9月初自行回到了这个页面进行了支持。</p>
-        <p>
-          <strong>
-            有两位朋友8月底支付了GPT4的价格，请务必与我联系，我将给你们退款。
-          </strong>
-        </p>
+        <p>祝大家新年快乐！</p>
         <br />
         <p>关于付费：</p>
         <p>
@@ -160,8 +151,8 @@ export default function App() {
         <Image src="wechat.png" alt="wechat" className="image" />
       </div> */}
       <div className="hidden-text-container">
-        {showText && isAdvanced && <p>密码: oct</p>}
-        {showText && !isAdvanced && <p>密码: oct</p>}
+        {showText && isAdvanced && <p>密码: 2024</p>}
+        {showText && !isAdvanced && <p>密码: 2024</p>}
       </div>
       <div className="image-container">
         <p>支付宝二维码：</p>
