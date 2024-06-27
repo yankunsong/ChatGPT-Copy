@@ -117,26 +117,17 @@ export default function App() {
   return (
     <div className="container">
       <div className="text-container">
-        <br />
-        {/* <p>欢迎大家使用我的网站!</p>
-        <p>到月末了，请大家对6月的使用情况，和对自己的帮助大小自助付费。</p>
-        <p>多用多付，少用少付，不用不付。 </p> */}
+        <p>大家好！</p>
         <p>
-          <strong>请大家对10月至今的使用情况自行付费。</strong>
-        </p>
-        <p>祝大家新年快乐！</p>
-        <br />
-        <p>关于付费：</p>
-        <p>
-          本网站初衷是方便董董星球的朋友体验GPT，无盈利目的。放收款码是因为GPT的访问不是免费的，通过API对话会产生一定的费用。
+          最近我收到了官方的提醒，检测出我的账号有很多来自国内的流量，需要我进行处理。所以我暂时只能选择无限期关停这个网站。{" "}
         </p>
         <p>
-          付费金额属于自愿，非强制性。金额填写0，也可以使用。但是如果你觉得这个网站对你有帮助，可以自愿付费。
+          网站上线的一年多里，得到了很多星球朋友们的支持，很高兴能帮助到大家。很遗憾因为政策原因，网站不能继续保留。
         </p>
         <p>
-          目前只有初期主动捐赠过的用户才在白名单里。所以如果你是刚知道这个网站并且想使用，请邮件与我说明情况。
+          待我最近工作空闲一点后，我会研究一下有没有其他的办法。如果有的话，我会在星球里和大家更新。
         </p>
-        <label>
+        {/* <label>
           Your name is:
           <input type="text" value={name} onChange={handleNameChange} />
         </label>
@@ -144,9 +135,9 @@ export default function App() {
           我刚刚已付费:
           <input type="text" value={amount} onChange={handleAmountChange} />
         </label>
-        <button onClick={handleButtonClick}>Check</button>
+        <button onClick={handleButtonClick}>Check</button> */}
         <p>
-          如果使用中有任何问题，可以通过邮件与我联系。我的邮箱是bigcatisgreat@gmail.com。
+          如果大家有任何的想法和建议，可以通过邮件与我联系。我的邮箱是bigcatisgreat@gmail.com。
         </p>
       </div>
       {/* <div className="image-container">
